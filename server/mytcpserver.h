@@ -9,7 +9,8 @@
 #include <QDebug>
 #include <QString>
 #include <QMap>
-#include "func_for_server.h"
+#include "func_for_server.h"  // подключаем класс функций
+#include "DataBase.h"
 
 class MyTcpServer : public QObject
 {
@@ -25,9 +26,8 @@ public slots:
     //void slotReadClient();
 private:
     QTcpServer * mTcpServer;
-    QMap <int, QTcpSocket*> mTcpSocket;
+    QMap <qintptr, QTcpSocket*> mTcpSocket;
     int server_status;
-    int count;
 };
 #endif // MYTCPSERVER_H
 

@@ -1,14 +1,16 @@
 #include "mytcpserver.h"
 #include <QDebug>
 #include <QCoreApplication>
+#include "func_for_server.h"
 
-MyTcpServer::~MyTcpServer()
-{
+MyTcpServer::~MyTcpServer(){
     //mTcpSocket->close();
     mTcpServer->close();
     server_status=0;
 }
+
 MyTcpServer::MyTcpServer(QObject *parent) : QObject(parent){
+    DataBase::getInstance();
     mTcpServer = new QTcpServer(this);
     connect(mTcpServer, &QTcpServer::newConnection,
             this, &MyTcpServer::slotNewConnection);
@@ -46,14 +48,15 @@ void MyTcpServer::slotServerRead(){
        }
        qDebug() << in_DATA.toUtf8();
        out_DATA = (parsing(in_DATA)).toUtf8();
+       qDebug()<<out_DATA;
        curr_mTcpSocket->write(out_DATA);
 }
 
 void MyTcpServer::slotClientDisconnected(){
 
     QTcpSocket* curr_mTcpSocket = ((QTcpSocket*)sender());
-    int curr_mTcpSocket_desc = curr_mTcpSocket->socketDescriptor();
-    mTcpSocket.erase(mTcpSocket.find(curr_mTcpSocket_desc),mTcpSocket.find(curr_mTcpSocket_desc));
+    //qintptr curr_mTcpSocket_desc = curr_mTcpSocket->socketDescriptor();          // с этими строками сервер рушится
+    //mTcpSocket.erase(mTcpSocket.find(curr_mTcpSocket_desc));                     // при отключении хоть одного сокета
     curr_mTcpSocket->close();
 }
 
