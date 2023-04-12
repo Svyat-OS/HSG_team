@@ -31,38 +31,59 @@ QString parsing(QString str){ //name_of_func||param1||param2||...
 }
 
 QString task1(QStringList params){
-    std::string a=params[0].toStdString();
-    QString ans = DataBase::getInstance()->sendQuerry("select task1 from Users where id = " + params[0]);
+    QString right = "+"; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task1 FROM users WHERE id = " + id,"task1",right); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
     return ans;
 }
 QString task2(QStringList params){
-    std::string a=params[0].toStdString();
-    QString ans = QString::fromStdString(a);
+    QString right = "+"; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task2 FROM users WHERE id = " + id,"task2",right); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
     return ans;
 }
 QString task3(QStringList params){
-    std::string a=params[0].toStdString();
-    QString ans = QString::fromStdString(a);
+    QString right = "+"; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task3 FROM users WHERE id = " + id,"task3",right); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
     return ans;
 }
 QString task4(QStringList params){
-    std::string a=params[0].toStdString();
-    QString ans = QString::fromStdString(a);
+    QString right = "+"; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task4 FROM users WHERE id = " + id,"task4",right); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
     return ans;
 }
 QString author(QStringList params){
-    std::string a=params[0].toStdString();
-    QString ans = QString::fromStdString(a);
-    return ans;
+    QString login=params[0];
+    QString password=params[1];
+    if (DataBase::getInstance()->sendQuerry("SELECT id FROM users where login = :login and password = :password","author",login,password)){
+        return "Авторизация прошла успешно!\r\r\n";
+    }
+    else {
+        return "Данный пользователь не найден или неправильный пароль\r\r\n";
+    }
 }
 QString reg(QStringList params){
-    std::string a=params[0].toStdString();
-    QString ans = QString::fromStdString(a);
-    return ans;
+    QString login=params[0];
+    QString email=params[1];
+    QString password1=params[2];
+    QString password2=params[3];
+    if (password1==password2){
+        if (DataBase::getInstance()->sendQuerry("INSERT INTO users(id, role, login, password, email, task1, task2, task3, task4) VALUES(:id,'stud', :login, :password, :email, 0, 0, 0, 0)","reg",login,password1,email)){
+            return "Пользователь зарегистрирован!\r\r\n";
+        }
+        else {
+            return "Пользователь не зарегистрирован!\r\r\n";
+        }
+    }
+    else{
+        return "Пароли не совпадают\r\r\n";
+    }
 }
 QString stat(QStringList params){
-    std::string a=params[0].toStdString();
-    QString ans = QString::fromStdString(a);
+    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task1,task2,task3,task4 FROM users WHERE id = " + id,"stat"); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
     return ans;
 }
 // при желании можно добавить по образцу функций выше новые функции (в parsing и h файл тоже надо не забыть их добавить)

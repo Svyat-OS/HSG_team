@@ -7,6 +7,7 @@
 #include <QSqlRecord>
 #include <QVariant>
 #include <QString>
+#include <QTcpSocket>
 
 //DataBase::getInstance();
 
@@ -47,23 +48,90 @@ class DataBase
             }
             return p_instance;
         }
-
-    QString sendQuerry (QString str) {// функция сделать запрос к БД
-        QSqlQuery query(db);
-        query.exec(str);
-        QSqlRecord rec = query.record();
-        const int asd1 = rec.indexOf(str);//номер "столбца"
-        //const int passwordIndex = rec.indexOf("password");
-        qDebug() << asd1;
-        QString res = "";
-        while(query.next()){
-            //res.append(query.value(loginIndex).toString()).append("\t").append(query.value(passwordIndex).toString()).append("\n");
-            res.append(query.value(asd1).toString());
-        }
-        qDebug()<<res.toUtf8();
-        return res;
+    QString sendQuerry (QString str, QString command) {// функция сделать запрос к БД
+       if (command=="stat"){
+           QSqlQuery query(db);
+           query.exec(str);
+           QString res = "";
+           while (query.next()) {
+               res.append(query.value(0).toString()).append('\t');
+               res.append(query.value(1).toString()).append('\t');
+               res.append(query.value(2).toString()).append('\t');
+               res.append(query.value(3).toString()).append('\t');
+           }
+           return res;
+       }
     }
 
+    QString sendQuerry (QString str, QString command,QString right) {// функция сделать запрос к БД
+        QSqlQuery query(db);
+        query.exec(str);
+        int res1 = -1;
+        while (query.next()) {
+            res1 = query.value(0).toInt();
+        }
+        if (right=="+"){
+            res1++;
+        }
+        else{
+
+            res1--;
+        }
+   // В чём проблема???
+        std::string res2 = std::to_string(res1);
+        QString res = QString::fromStdString(res2);
+        qDebug()<<res.toUtf8();
+        query.prepare("UPDATE users SET :command = :res WHERE id = :id");  // Вместо id - нужен текущий Socket_id авторизованного пользователя
+        query.bindValue(":command", command);
+        query.bindValue(":res", res1);
+        query.bindValue(":id", 2); // Вместо id - нужен текущий Socket_id авторизованного пользователя
+        query.exec();
+        return res;
+    }
+    bool sendQuerry (QString str, QString command, QString login, QString password){  //перегрузка для авторизации
+        if (command=="author"){
+            QSqlQuery query(db); // запрос, который узнаёт, находится ли данный пользователь в БД
+            query.prepare(str);
+            query.bindValue(":login", login);
+            query.bindValue(":password", password);
+            query.exec();
+            QString res = "";
+            while (query.next()) {
+               res = query.value(0).toString();
+            }
+            //qDebug()<<res.toUtf8();
+            if (res==""){
+                return false;
+            }
+            else{  // в этой части присваиваем новому соединению сокет (пока неизвестно кап qintpt перевести в INT)
+                //query.prepare("UPDATE users SET Socket_id = :Socket_id WHERE login = :login AND password = :password");
+                //query.bindValue(":login", login);
+                //query.bindValue(":password", password);
+                //query.bindValue(":Socket_id", (((QTcpSocket*)sender())->socketDescriptor()));
+                //query.exec();
+                return true;
+            }
+        }
+    }
+    bool sendQuerry (QString str, QString command, QString login, QString password1, QString email){  //перегрузка для регистрации
+        if (command=="reg"){
+            QSqlQuery query1(db); // посчитаем количество интов
+            query1.exec("SELECT COUNT(*) FROM users");
+            int id;
+            while (query1.next()) {
+                id = query1.value(0).toInt();
+            }
+            id++; // так мы посчитали количество id и назанчаем следующий по счёту
+            QSqlQuery query(db); // запрос, который узнаёт, находится ли данный пользователь в БД
+            query.prepare(str);
+            query.bindValue(":login", login);
+            query.bindValue(":password", password1);
+            query.bindValue(":email", email);
+            query.bindValue(":id", id);
+            query.exec();
+            return true;// при регистрации сокет не назначаем
+        }
+    }
 };
 
 DataBase * DataBase::p_instance;

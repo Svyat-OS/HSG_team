@@ -21,7 +21,6 @@ public:
 public slots:
     void slotNewConnection();
     void slotClientDisconnected();
-
     void slotServerRead();
     //void slotReadClient();
 private:
