@@ -62,7 +62,6 @@ class DataBase
            return res;
        }
     }
-
     QString sendQuerry (QString str, QString command,QString right) {// функция сделать запрос к БД
         QSqlQuery query(db);
         query.exec(str);
@@ -74,18 +73,13 @@ class DataBase
             res1++;
         }
         else{
-
             res1--;
         }
-   // В чём проблема???
         std::string res2 = std::to_string(res1);
         QString res = QString::fromStdString(res2);
-        qDebug()<<res.toUtf8();
-        query.prepare("UPDATE users SET :command = :res WHERE id = :id");  // Вместо id - нужен текущий Socket_id авторизованного пользователя
-        query.bindValue(":command", command);
-        query.bindValue(":res", res1);
-        query.bindValue(":id", 2); // Вместо id - нужен текущий Socket_id авторизованного пользователя
-        query.exec();
+        QSqlQuery query1(db);
+        query1.prepare("UPDATE users SET "+ command +" = " + res + " WHERE id = " + "2");  // Вместо id (и двойки) - нужен текущий Socket_id авторизованного пользователя(и его дискриптор)
+        query1.exec();
         return res;
     }
     bool sendQuerry (QString str, QString command, QString login, QString password){  //перегрузка для авторизации
@@ -103,7 +97,7 @@ class DataBase
             if (res==""){
                 return false;
             }
-            else{  // в этой части присваиваем новому соединению сокет (пока неизвестно кап qintpt перевести в INT)
+            else{  // в этой части присваиваем новому соединению сокет (пока неизвестно кап qintpt перевести в INT)  (с Update аккуратнее - может потребуется по-другому это реализовать, см выше как)
                 //query.prepare("UPDATE users SET Socket_id = :Socket_id WHERE login = :login AND password = :password");
                 //query.bindValue(":login", login);
                 //query.bindValue(":password", password);
