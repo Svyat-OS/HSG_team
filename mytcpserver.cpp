@@ -43,7 +43,7 @@ void MyTcpServer::slotServerRead(){
            in_DATA += curr_mTcpSocket->readAll();
        }
        qDebug() << in_DATA.toUtf8();
-       out_DATA = (parsing(in_DATA)).toUtf8();
+       out_DATA = (parsing(in_DATA, curr_mTcpSocket->socketDescriptor())).toUtf8();
        qDebug()<<out_DATA;
        curr_mTcpSocket->write(out_DATA);
 }

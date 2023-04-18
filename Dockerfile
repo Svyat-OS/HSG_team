@@ -24,3 +24,4 @@ ENTRYPOINT ["./echoServer_332"]
 
 #docker build .
 #docker run -p 33333:80/tcp <hash-функция образа>
+#С помощью команды узнаём id нашего контейнера и подключаемся к нему через putty

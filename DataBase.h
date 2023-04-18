@@ -7,7 +7,6 @@
 #include <QSqlRecord>
 #include <QVariant>
 #include <QString>
-#include <QTcpSocket>
 
 //DataBase::getInstance();
 
@@ -48,7 +47,7 @@ class DataBase
             }
             return p_instance;
         }
-    QString sendQuerry (QString str, QString command) {// функция сделать запрос к БД
+    QString sendQuerry (QString str, QString command,int descriptor) {// функция сделать запрос к БД (статистика)
        if (command=="stat"){
            QSqlQuery query(db);
            query.exec(str);
@@ -62,10 +61,11 @@ class DataBase
            return res;
        }
     }
-    QString sendQuerry (QString str, QString command,QString right) {// функция сделать запрос к БД
+    QString sendQuerry (QString str, QString command,QString right,int descriptor) {// функция сделать запрос к БД (task1 - task4)
+
         QSqlQuery query(db);
         query.exec(str);
-        int res1 = -1;
+        int res1;
         while (query.next()) {
             res1 = query.value(0).toInt();
         }
@@ -77,32 +77,28 @@ class DataBase
         }
         std::string res2 = std::to_string(res1);
         QString res = QString::fromStdString(res2);
+        qDebug()<<res;
         QSqlQuery query1(db);
-        query1.prepare("UPDATE users SET "+ command +" = " + res + " WHERE id = " + "2");  // Вместо id (и двойки) - нужен текущий Socket_id авторизованного пользователя(и его дискриптор)
+        query1.prepare("UPDATE users SET "+ command +" = " + res + " WHERE Socket_id = " + QString::number(descriptor) );
         query1.exec();
         return res;
     }
-    bool sendQuerry (QString str, QString command, QString login, QString password){  //перегрузка для авторизации
+    bool sendQuerry (QString str, QString command, QString login, QString password, int descriptor){  //перегрузка для авторизации
         if (command=="author"){
+            qDebug()<<descriptor;
+            qDebug()<<QString::number(descriptor).toUtf8();
             QSqlQuery query(db); // запрос, который узнаёт, находится ли данный пользователь в БД
-            query.prepare(str);
-            query.bindValue(":login", login);
-            query.bindValue(":password", password);
-            query.exec();
+            query.exec(str);
             QString res = "";
             while (query.next()) {
                res = query.value(0).toString();
             }
-            //qDebug()<<res.toUtf8();
             if (res==""){
                 return false;
             }
-            else{  // в этой части присваиваем новому соединению сокет (пока неизвестно кап qintpt перевести в INT)  (с Update аккуратнее - может потребуется по-другому это реализовать, см выше как)
-                //query.prepare("UPDATE users SET Socket_id = :Socket_id WHERE login = :login AND password = :password");
-                //query.bindValue(":login", login);
-                //query.bindValue(":password", password);
-                //query.bindValue(":Socket_id", (((QTcpSocket*)sender())->socketDescriptor()));
-                //query.exec();
+            else{
+                QSqlQuery query1(db);
+                query1.exec("UPDATE users SET Socket_id = "+ QString::number(descriptor) + " WHERE login = \'" + login + "\' and password = " + password);
                 return true;
             }
         }

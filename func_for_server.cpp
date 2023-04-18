@@ -1,63 +1,56 @@
 #include "func_for_server.h"
 #include "DataBase.h"
 
-QString parsing(QString str){ //name_of_func||param1||param2||...
+QString parsing(QString str, int descriptor){ //name_of_func||param1||param2||...
+    str = str.left(str.length()-2);
     QStringList ans = str.split("||");
-    std::string temp = ""; // вспомогательная переменная, чтобы избавить от \r\n на конце
-    for (int i=0;i<((ans[ans.size()-1]).toUtf8()).length()-2;i++){   // цикл для удаления \r\n на конце последней переменной
-        temp += (ans[ans.size()-1].toUtf8())[i];
-    }
-    ans[ans.size()-1] = QString::fromStdString(temp);
+    qDebug()<<str;
     QString func = ans[0];
     ans.pop_front(); // внимательно! теперь в этом листе названия функции уже нет
     if (func=="task1"){
-        func=task1(ans);}
+        func=task1(ans,descriptor);}
     else if (func=="task2"){
-        func=task2(ans);}
+        func=task2(ans,descriptor);}
     else if (func=="task3"){
-        func=task3(ans);}
+        func=task3(ans,descriptor);}
     else if (func=="task4"){
-        func=task4(ans);}
+        func=task4(ans,descriptor);}
     else if (func=="authorization"){
-        func=author(ans);}
+        func=author(ans,descriptor);}
     else if (func=="registration"){
         func=reg(ans);}
     else if (func=="statistics"){
-        func=stat(ans);}
+        func=stat(ans,descriptor);}
     else {
         func = "ERROR!";
     }
     return (func+'\r'+'\n');
 }
 
-QString task1(QStringList params){
-    QString right = "+"; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
-    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
-    QString ans = DataBase::getInstance()->sendQuerry("SELECT task1 FROM users WHERE id = " + id,"task1",right); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
+QString task1(QStringList params, int descriptor){
+    QString right = params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task1 FROM users WHERE Socket_id = " + QString::number(descriptor),"task1",right,descriptor);
     return ans;
 }
-QString task2(QStringList params){
-    QString right = "+"; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
-    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
-    QString ans = DataBase::getInstance()->sendQuerry("SELECT task2 FROM users WHERE id = " + id,"task2",right); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
+QString task2(QStringList params, int descriptor){
+    QString right =  params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task2 FROM users WHERE Socket_id = " + QString::number(descriptor),"task2",right,descriptor);
     return ans;
 }
-QString task3(QStringList params){
-    QString right = "+"; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
-    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
-    QString ans = DataBase::getInstance()->sendQuerry("SELECT task3 FROM users WHERE id = " + id,"task3",right); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
+QString task3(QStringList params, int descriptor){
+    QString right = params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task3 FROM users WHERE Socket_id = " + QString::number(descriptor),"task3",right,descriptor);
     return ans;
 }
-QString task4(QStringList params){
-    QString right = "+"; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
-    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
-    QString ans = DataBase::getInstance()->sendQuerry("SELECT task4 FROM users WHERE id = " + id,"task4",right); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
+QString task4(QStringList params, int descriptor){
+    QString right = params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task4 FROM users WHERE Socket_id = " + QString::number(descriptor),"task4",right,descriptor);
     return ans;
 }
-QString author(QStringList params){
+QString author(QStringList params, int descriptor){
     QString login=params[0];
     QString password=params[1];
-    if (DataBase::getInstance()->sendQuerry("SELECT id FROM users where login = :login and password = :password","author",login,password)){
+    if (DataBase::getInstance()->sendQuerry("SELECT id FROM users where login = \'" + login + "\' and password = " + password,"author",login,password,descriptor)){
         return "Авторизация прошла успешно!\r\r\n";
     }
     else {
@@ -81,9 +74,8 @@ QString reg(QStringList params){
         return "Пароли не совпадают\r\r\n";
     }
 }
-QString stat(QStringList params){
-    QString id = "2" ; //вместо id (где '2') должен быть Socket_id (пока есть проблема)
-    QString ans = DataBase::getInstance()->sendQuerry("SELECT task1,task2,task3,task4 FROM users WHERE id = " + id,"stat"); // вместо id (где '2') должен быть Socket_id (пока есть проблема)
+QString stat(QStringList params, int descriptor){
+    QString ans = DataBase::getInstance()->sendQuerry("SELECT task1,task2,task3,task4 FROM users WHERE Socket_id = " + QString::number(descriptor),"stat", descriptor);
     return ans;
 }
 // при желании можно добавить по образцу функций выше новые функции (в parsing и h файл тоже надо не забыть их добавить)

@@ -3,14 +3,15 @@
 #include <QString>
 #include <QStringList>
 #include <QDebug>
+#include <QTcpSocket>
 
-QString parsing(QString str);
-QString task1(QStringList params);
-QString task2(QStringList params);
-QString task3(QStringList params);
-QString task4(QStringList params);
-QString author(QStringList params);
+QString parsing(QString str, int descriptor);
+QString task1(QStringList params,int descriptor);
+QString task2(QStringList params,int descriptor);
+QString task3(QStringList params,int descriptor);
+QString task4(QStringList params,int descriptor);
+QString author(QStringList params,int descriptor);
 QString reg(QStringList params);
-QString stat(QStringList params);
+QString stat(QStringList params,int descriptor);
 
 #endif // FUNC_FOR_SERVER_H
