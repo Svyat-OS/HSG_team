@@ -1,5 +1,6 @@
 #include "tasks.h"
 #include "ui_tasks.h"
+#include "singletonclient.h"
 
 tasks::tasks(QWidget *parent) :
     QWidget(parent),
@@ -17,9 +18,9 @@ void tasks::on_pushButton_6_clicked() // посмоттерть статисти
 {
     // отправляем серверу запрос statistics и принимаем данные статистики по сокету
     QString query = "statistics";
-    qDebug()<< query;
-    QString stat = "Пока не реализовано";                                                      // ПОМЕНЯТЬ
-    QMessageBox::about(this, "Статистика", stat);
+    Singleton::getInstance()->slotsendMessage(query);
+    QString str = Singleton::getInstance()->slotReadyRead();
+    QMessageBox::about(this, "Статистика", str);
 }
 
 
@@ -41,6 +42,9 @@ void tasks::on_pushButton_clicked() // task1
 
 void tasks::on_pushButton_3_clicked() //task2
 {
+    this->hide();
+    task2 *a = new task2;
+    a->show();
     // создаём возможность попасть в форму с задачей 2
     // создать форму с задачей 2, там будет текст задачи с рандомными числами,
     // генерируем там рандомные числа для варианта
@@ -55,6 +59,9 @@ void tasks::on_pushButton_3_clicked() //task2
 
 void tasks::on_pushButton_2_clicked() //task3
 {
+    this->hide();
+    task3 *a = new task3;
+    a->show();
     // создаём возможность попасть в форму с задачей 3
     // создать форму с задачей 3, там будет текст задачи с рандомными числами,
     // генерируем там рандомные числа для варианта
@@ -68,6 +75,9 @@ void tasks::on_pushButton_2_clicked() //task3
 
 void tasks::on_pushButton_4_clicked() //task4
 {
+    this->hide();
+    task4 *a = new task4;
+    a->show();
     // создаём возможность попасть в форму с задачей 4
     // создать форму с задачей 4, там будет текст задачи с рандомными числами,
     // генерируем там рандомные числа для варианта

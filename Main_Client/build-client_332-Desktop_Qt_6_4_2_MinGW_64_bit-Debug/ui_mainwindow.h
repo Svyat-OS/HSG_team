@@ -54,10 +54,10 @@ public:
         label_3->setGeometry(QRect(20, 130, 61, 20));
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(10, 190, 91, 18));
+        pushButton->setGeometry(QRect(320, 180, 91, 18));
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(250, 190, 181, 18));
+        pushButton_2->setGeometry(QRect(20, 180, 181, 18));
         lineEdit = new QLineEdit(centralwidget);
         lineEdit->setObjectName("lineEdit");
         lineEdit->setGeometry(QRect(310, 90, 113, 20));

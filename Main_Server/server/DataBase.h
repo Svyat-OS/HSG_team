@@ -81,7 +81,6 @@ class DataBase
         QSqlQuery query1(db);
         query1.prepare("UPDATE users SET "+ command +" = " + res + " WHERE Socket_id = " + QString::number(descriptor) );
         query1.exec();
-        return res;
     }
     bool sendQuerry (QString str, QString command, QString login, QString password, int descriptor){  //перегрузка для авторизации
         if (command=="author"){

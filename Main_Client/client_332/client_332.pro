@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,19 +13,30 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     reg.cpp \
+    singletonclient.cpp \
     task1.cpp \
+    task2.cpp \
+    task3.cpp \
+    task4.cpp \
     tasks.cpp
 
 HEADERS += \
     mainwindow.h \
     reg.h \
+    singletonclient.h \
     task1.h \
+    task2.h \
+    task3.h \
+    task4.h \
     tasks.h
 
 FORMS += \
     mainwindow.ui \
     reg.ui \
     task1.ui \
+    task2.ui \
+    task3.ui \
+    task4.ui \
     tasks.ui
 
 # Default rules for deployment.

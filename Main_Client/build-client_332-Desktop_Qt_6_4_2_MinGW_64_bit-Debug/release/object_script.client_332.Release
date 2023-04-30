@@ -1,6 +1,7 @@
 release/main.o
 release/mainwindow.o
 release/reg.o
+release/singletonclient.o
 release/task1.o
 release/task2.o
 release/task3.o
@@ -8,6 +9,7 @@ release/task4.o
 release/tasks.o
 release/moc_mainwindow.o
 release/moc_reg.o
+release/moc_singletonclient.o
 release/moc_task1.o
 release/moc_task2.o
 release/moc_task3.o

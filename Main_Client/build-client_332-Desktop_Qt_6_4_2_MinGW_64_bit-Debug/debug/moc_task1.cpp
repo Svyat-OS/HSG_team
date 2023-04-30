@@ -8,7 +8,6 @@
 
 #include <memory>
 #include "../../client_332/task1.h"
-#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'task1.h' doesn't include <QObject>."

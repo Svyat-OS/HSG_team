@@ -24,7 +24,7 @@ void MyTcpServer::slotNewConnection(){
         qDebug() << "New client connected";
         QTcpSocket* curr_mTcpSocket;
         curr_mTcpSocket = mTcpServer->nextPendingConnection();
-        curr_mTcpSocket->write("Hello!\r\r\n");
+        //curr_mTcpSocket->write("Hello!\r\r\n");
         mTcpSocket[curr_mTcpSocket->socketDescriptor()]=curr_mTcpSocket;
         connect(curr_mTcpSocket, &QTcpSocket::readyRead,
                 this,&MyTcpServer::slotServerRead);
@@ -35,7 +35,9 @@ void MyTcpServer::slotNewConnection(){
 
 void MyTcpServer::slotServerRead(){
     QTcpSocket *curr_mTcpSocket = (QTcpSocket*)sender();
-       QByteArray out_DATA;
+       qDebug() <<"читаю";
+       //QByteArray out_DATA;
+       QString out_DATA;
        QString in_DATA;
        in_DATA.clear();
        while(curr_mTcpSocket->bytesAvailable()>0)
@@ -45,7 +47,7 @@ void MyTcpServer::slotServerRead(){
        qDebug() << in_DATA.toUtf8();
        out_DATA = (parsing(in_DATA, curr_mTcpSocket->socketDescriptor())).toUtf8();
        qDebug()<<out_DATA;
-       curr_mTcpSocket->write(out_DATA);
+       curr_mTcpSocket->write(out_DATA.toUtf8());
 }
 
 void MyTcpServer::slotClientDisconnected(){
@@ -53,6 +55,7 @@ void MyTcpServer::slotClientDisconnected(){
     QTcpSocket* curr_mTcpSocket = ((QTcpSocket*)sender());
     //qintptr curr_mTcpSocket_desc = curr_mTcpSocket->socketDescriptor();          // с этими строками сервер рушится
     //mTcpSocket.erase(mTcpSocket.find(curr_mTcpSocket_desc));                     // при отключении хоть одного сокета
+    qDebug()<<"New client disconnected";
     curr_mTcpSocket->close();
 }
 

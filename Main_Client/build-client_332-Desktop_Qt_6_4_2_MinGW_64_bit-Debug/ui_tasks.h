@@ -45,10 +45,10 @@ public:
         pushButton_4->setGeometry(QRect(190, 160, 101, 41));
         pushButton_5 = new QPushButton(tasks);
         pushButton_5->setObjectName("pushButton_5");
-        pushButton_5->setGeometry(QRect(100, 10, 101, 41));
+        pushButton_5->setGeometry(QRect(100, 230, 101, 41));
         pushButton_6 = new QPushButton(tasks);
         pushButton_6->setObjectName("pushButton_6");
-        pushButton_6->setGeometry(QRect(100, 240, 101, 41));
+        pushButton_6->setGeometry(QRect(100, 20, 101, 41));
 
         retranslateUi(tasks);
 

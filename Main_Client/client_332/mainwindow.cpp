@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "singletonclient.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,21 +17,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked() // пройти авторизацию
 {
+    Singleton::getInstance();
     QString login = ui->lineEdit->text();QString passwd =  ui->lineEdit_2->text();
-
     QString query = "authorization||"+login + "||" + passwd;
-    qDebug() << query;
     ui->lineEdit->clear(); ui->lineEdit_2->clear();
-
-    //отправляем запрос (query) серверу о регистрации, сверяемся, прошла ли авторизация?
-    QString str ="Авторизация прошла успешно!\r\r\n";      //узнаем, существует ли пользователь?                                                // ПОМЕНЯТЬ
+    Singleton::getInstance()->slotsendMessage(query);
+    QString str = Singleton::getInstance()->slotReadyRead();
+    //qDebug() << str << "Проверка 2";
     if (str == "Авторизация прошла успешно!\r\r\n"){
         this->hide();
         tasks *a = new tasks;
         a->show();
     }
     else{
-        QMessageBox::critical(this, "Авторизация не прошла", str);
+        QMessageBox::critical(this, "Авторизация не прошла", "Пользователь не найден");
     }
 }
 

@@ -1,5 +1,6 @@
 #include "reg.h"
 #include "ui_reg.h"
+#include "singletonclient.h"
 
 reg::reg(QWidget *parent) :
     QWidget(parent),
@@ -26,11 +27,10 @@ void reg::on_pushButton_2_clicked() // пройти регистрацию
     QString passwd =  ui->lineEdit_3->text(); QString repeat_passwd = ui->lineEdit_4->text();
 
     QString query = "registration||"+login + "||" + email + "||" + passwd + "||" + repeat_passwd;
-    qDebug() << query;
+    //qDebug() << query;
     ui->lineEdit->clear(); ui->lineEdit_2->clear(); ui->lineEdit_3->clear(); ui->lineEdit_4->clear();
-
-    //отправляем запрос (query) серверу о регистрации, сверяемся, прошла ли регистрация?
-    QString str = "Пользователь зарегистрирован!\r\r\n";                                                  // ПОМЕНЯТЬ
+    Singleton::getInstance()->slotsendMessage(query);
+    QString str = Singleton::getInstance()->slotReadyRead();
     if (str == "Пользователь зарегистрирован!\r\r\n"){
         this->hide();
         tasks *a = new tasks;

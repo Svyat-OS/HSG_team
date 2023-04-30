@@ -37,10 +37,10 @@ public:
         pushButton->setGeometry(QRect(90, 10, 221, 61));
         pushButton_2 = new QPushButton(task1);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(20, 150, 101, 18));
+        pushButton_2->setGeometry(QRect(20, 150, 101, 31));
         pushButton_3 = new QPushButton(task1);
         pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(250, 150, 111, 20));
+        pushButton_3->setGeometry(QRect(250, 150, 111, 31));
         lineEdit = new QLineEdit(task1);
         lineEdit->setObjectName("lineEdit");
         lineEdit->setGeometry(QRect(250, 100, 113, 20));

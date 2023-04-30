@@ -2,50 +2,123 @@
 #include "DataBase.h"
 
 QString parsing(QString str, int descriptor){ //name_of_func||param1||param2||...
-    //str = str.left(str.length()-2);   может не пригодиться
+    //str = str.left(str.length()-2);  // может не пригодиться
     QStringList ans = str.split("||");
     qDebug()<<str;
     QString func = ans[0];
     ans.pop_front(); // внимательно! теперь в этом листе названия функции уже нет
     if (func=="task1"){
-        func=task1(ans,descriptor);}
+        func=task1(ans,descriptor);
+        return func;}
     else if (func=="task2"){
-        func=task2(ans,descriptor);}
+        func=task2(ans,descriptor);
+        return func;}
     else if (func=="task3"){
-        func=task3(ans,descriptor);}
+        func=task3(ans,descriptor);
+        return func;}
     else if (func=="task4"){
-        func=task4(ans,descriptor);}
+        func=task4(ans,descriptor);
+        return func;}
     else if (func=="authorization"){
-        func=author(ans,descriptor);}
+        func=author(ans,descriptor);
+        return func;}
     else if (func=="registration"){
-        func=reg(ans,descriptor);}
+        func=reg(ans,descriptor);
+        return func;}
     else if (func=="statistics"){
-        func=stat(ans,descriptor);}
+        func=stat(ans,descriptor);
+        return func;}
     else {
         func = "ERROR!";
+        return (func+'\r'+'\n');
     }
-    return (func+'\r'+'\n');
+
 }
 
 QString task1(QStringList params, int descriptor){
-    QString right = params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    int answer_stud = params[0].toInt(); // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    int x_1 = params[1].toInt(); //переменные из условия задачи
+    int y_1 = params[2].toInt(); // их столько, сколько нужно для задачи
+    int real_ans = 0; // пока так
+    // кусок кода, где cчитаем настоящий правильный ответ
+    QString right;
+    if (answer_stud==real_ans){
+        right = '+';
+    }
+    else{
+        right = '-';
+    }
     QString ans = DataBase::getInstance()->sendQuerry("SELECT task1 FROM users WHERE Socket_id = " + QString::number(descriptor),"task1",right,descriptor);
-    return ans;
+    if ( right =="+"){
+        return "Ответ верный";
+    }
+    else{
+        return "Ответ неверный";
+    }
 }
 QString task2(QStringList params, int descriptor){
-    QString right =  params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    int answer_stud = params[0].toInt(); // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    int x_2 = params[1].toInt(); //переменные из условия задачи
+    int y_2 = params[2].toInt(); // их столько, сколько нужно для задачи
+    int real_ans = 0; // пока так
+    // кусок кода, где считаем настоящий правильный ответ
+    QString right;
+    if (answer_stud==real_ans){
+        right = '+';
+    }
+    else{
+        right = '-';
+    }
     QString ans = DataBase::getInstance()->sendQuerry("SELECT task2 FROM users WHERE Socket_id = " + QString::number(descriptor),"task2",right,descriptor);
-    return ans;
+    if ( right =="+"){
+        return "Ответ верный";
+    }
+    else{
+        return "Ответ неверный";
+    }
 }
 QString task3(QStringList params, int descriptor){
-    QString right = params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    int answer_stud = params[0].toInt(); // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    int x_3 = params[1].toInt(); //переменные из условия задачи
+    int y_4 = params[2].toInt(); // их столько, сколько нужно для задачи
+    int real_ans = 0; // пока так
+    // кусок кода, где считаем настоящий правильный ответ
+    QString right;
+    if (answer_stud==real_ans){
+        right = '+';
+    }
+    else{
+        right = '-';
+    }
     QString ans = DataBase::getInstance()->sendQuerry("SELECT task3 FROM users WHERE Socket_id = " + QString::number(descriptor),"task3",right,descriptor);
+    if ( right =="+"){
+        return "Ответ верный";
+    }
+    else{
+        return "Ответ неверный";
+    }
     return ans;
 }
 QString task4(QStringList params, int descriptor){
-    QString right = params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    int answer_stud = params[0].toInt(); // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    int x_4 = params[1].toInt(); //переменные из условия задачи
+    int y_4 = params[2].toInt(); // их столько, сколько нужно для задачи
+    int real_ans = 0; // пока так
+    // кусок кода, где считаем настоящий правильный ответ
+    QString right;
+    if (answer_stud==real_ans){
+        right = '+';
+    }
+    else{
+        right = '-';
+    }
     QString ans = DataBase::getInstance()->sendQuerry("SELECT task4 FROM users WHERE Socket_id = " + QString::number(descriptor),"task4",right,descriptor);
-    return ans;
+    if ( right =="+"){
+        return "Ответ верный";
+    }
+    else{
+        return "Ответ неверный";
+    }
 }
 QString author(QStringList params, int descriptor){
     QString login=params[0];
