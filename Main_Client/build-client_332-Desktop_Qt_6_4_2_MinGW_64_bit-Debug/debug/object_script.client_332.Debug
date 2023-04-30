@@ -1,0 +1,17 @@
+debug/main.o
+debug/mainwindow.o
+debug/reg.o
+debug/singletonclient.o
+debug/task1.o
+debug/task2.o
+debug/task3.o
+debug/task4.o
+debug/tasks.o
+debug/moc_mainwindow.o
+debug/moc_reg.o
+debug/moc_singletonclient.o
+debug/moc_task1.o
+debug/moc_task2.o
+debug/moc_task3.o
+debug/moc_task4.o
+debug/moc_tasks.o
