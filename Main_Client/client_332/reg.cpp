@@ -31,6 +31,7 @@ void reg::on_pushButton_2_clicked() // пройти регистрацию
     ui->lineEdit->clear(); ui->lineEdit_2->clear(); ui->lineEdit_3->clear(); ui->lineEdit_4->clear();
     Singleton::getInstance()->slotsendMessage(query);
     QString str = Singleton::getInstance()->slotReadyRead();
+    qDebug() <<str;
     if (str == "Пользователь зарегистрирован!\r\r\n"){
         this->hide();
         tasks *a = new tasks;

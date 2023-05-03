@@ -24,7 +24,7 @@ void MyTcpServer::slotNewConnection(){
         qDebug() << "New client connected";
         QTcpSocket* curr_mTcpSocket;
         curr_mTcpSocket = mTcpServer->nextPendingConnection();
-        //curr_mTcpSocket->write("Hello!\r\r\n");
+        //curr_mTcpSocket->write("Hello!\r\r\nIt is a server\r\r\n");
         mTcpSocket[curr_mTcpSocket->socketDescriptor()]=curr_mTcpSocket;
         connect(curr_mTcpSocket, &QTcpSocket::readyRead,
                 this,&MyTcpServer::slotServerRead);
@@ -36,7 +36,6 @@ void MyTcpServer::slotNewConnection(){
 void MyTcpServer::slotServerRead(){
     QTcpSocket *curr_mTcpSocket = (QTcpSocket*)sender();
        qDebug() <<"читаю";
-       //QByteArray out_DATA;
        QString out_DATA;
        QString in_DATA;
        in_DATA.clear();

@@ -5,6 +5,8 @@
 #include <QByteArray>
 #include <QObject>
 #include <QDebug>
+#include "mainwindow.h"
+#include <QString>
 
 class Singleton;
 
@@ -13,7 +15,9 @@ class SingletonDestroyer
     private:
         Singleton * p_instance;
     public:
-        ~SingletonDestroyer() { delete p_instance;}
+        ~SingletonDestroyer() {
+            //mTcpSocket->close();
+            delete p_instance;}
         void initialize(Singleton * p){p_instance = p;}
 };
 
@@ -27,7 +31,7 @@ class Singleton: public QObject
         QTcpSocket* m_pTcpSocket;
         quint16 m_nNextBlockSize;
     protected:
-        Singleton(QObject *parent = nullptr);
+        explicit Singleton(QObject *parent = nullptr);
         Singleton(const Singleton& ) = delete;
         Singleton& operator = (Singleton &)=delete;
         ~Singleton() {
@@ -44,8 +48,8 @@ class Singleton: public QObject
             return p_instance;
         }
         void slotsendMessage(QString str);
-        QString slotReadyRead();
 public slots:
+        QString slotReadyRead();
         void slotconnected();
 };
 

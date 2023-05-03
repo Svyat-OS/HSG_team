@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    Singleton::getInstance();
     ui->setupUi(this);
 }
 
@@ -17,12 +18,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked() // пройти авторизацию
 {
-    Singleton::getInstance();
     QString login = ui->lineEdit->text();QString passwd =  ui->lineEdit_2->text();
     QString query = "authorization||"+login + "||" + passwd;
     ui->lineEdit->clear(); ui->lineEdit_2->clear();
+
     Singleton::getInstance()->slotsendMessage(query);
-    QString str = Singleton::getInstance()->slotReadyRead();
+    QString str = Singleton::getInstance()->slotReadyRead(); //
     //qDebug() << str << "Проверка 2";
     if (str == "Авторизация прошла успешно!\r\r\n"){
         this->hide();

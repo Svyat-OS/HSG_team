@@ -22,7 +22,6 @@ public slots:
     void slotNewConnection();
     void slotClientDisconnected();
     void slotServerRead();
-    //void slotReadClient();
 private:
     QTcpServer * mTcpServer;
     QMap <qintptr, QTcpSocket*> mTcpSocket;
