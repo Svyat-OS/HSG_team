@@ -137,7 +137,11 @@ QString reg(QStringList params, int descriptor){
     QString password2=params[3];
     if (password1==password2){
         if (DataBase::getInstance()->sendQuerry("INSERT INTO users(id, role, login, password, email, task1, task2, task3, task4) VALUES(:id,'stud', :login, :password, :email, 0, 0, 0, 0)","reg",login,password1,email)){
-            author(params,descriptor);
+            QStringList params1;
+            params1.push_back(login);
+            params1.push_back(password1);
+            author(params1,descriptor);
+            qDebug()<<params1[0]<<" "<<params1[1];
             return "Пользователь зарегистрирован!\r\r\n";
         }
         else {
