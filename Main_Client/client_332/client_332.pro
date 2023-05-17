@@ -22,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
+    random.h \
     reg.h \
     singletonclient.h \
     task1.h \

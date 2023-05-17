@@ -36,13 +36,50 @@ QString parsing(QString str, int descriptor){ //name_of_func||param1||param2||..
 }
 
 QString task1(QStringList params, int descriptor){
-    int answer_stud = params[0].toInt(); // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
-    int x_1 = params[1].toInt(); //переменные из условия задачи
-    int y_1 = params[2].toInt(); // их столько, сколько нужно для задачи
-    int real_ans = 0; // пока так
-    // кусок кода, где cчитаем настоящий правильный ответ
+    QString answer_stud = params[0]; // если правильно +1, если нет, то -1   В будущем каждый будет это реализовывать, когда будет делать для своей задачи
+    QString right_answer = ""; // считаем правильный ответ
+    QList <QString> Edges; // рёбер всего 8, матрица 8 на 2, каждая строка - это ребро, левый стоблик - левая вершина, правый столбик - правая вершина
+    Edges.clear();
+    Edges.push_back(params[1]);Edges.push_back(params[2]);Edges.push_back(params[1]);Edges.push_back(params[7]);Edges.push_back(params[1]);Edges.push_back(params[8]);
+    Edges.push_back(params[2]);Edges.push_back(params[6]);Edges.push_back(params[3]);Edges.push_back(params[5]);Edges.push_back(params[4]);
+    Edges.push_back(params[5]);Edges.push_back(params[5]);Edges.push_back(params[6]);Edges.push_back(params[5]);Edges.push_back(params[9]);
+    QMap <QString,int> spisok; // будем считать, скольким рёбрам инцидентна каждая вершина
+    spisok.clear();
+    for (int i=1;i<10;i++){ // пока все вершины встречаеются 0 раз
+        spisok[QString::number(i)]=0;
+    }
+    for (int i=0;i<Edges.size();i++){//считаем, скольким рёбрам инцидентна каждая вершина
+        spisok[Edges[i]]++;
+    }
+    QString temp; // текущая вершина, которая является листом
+    for (int j=0;j<((Edges.size()/2)-1);j++){ // этот процесс происходит p-1 раз, где p - это кол-во рёбер
+        for (int k=1;k<10;k++){
+            if (spisok[QString::number(k)]==1){ // проверка на лист
+                temp = QString::number(k); // наш минимальный листок
+                break;
+            }
+        }
+        for (int i=0;i<8;i++){
+            if (Edges[i*2]==temp){
+                spisok[Edges[i*2]]--; spisok[Edges[i*2+1]]--; // количество этих вершин уменьшается на 1
+                right_answer += Edges[i*2+1];
+                Edges[i*2] = "-1"; Edges[i*2+1] = "-1"; // забываем про это ребро
+                break;
+            }
+            if (Edges[i*2+1]==temp){
+                spisok[Edges[i*2]]--; spisok[Edges[i*2+1]]--; // количество этихх вершин уменьшается на 1
+                right_answer += Edges[i*2];
+                Edges[i*2] = "-1"; Edges[i*2+1] = "-1"; // забываем про это ребро
+                break;
+            }
+        }
+        //for (int i=0;i<Edges.size();i++){
+        //    qDebug()<<Edges[i].toUtf8();
+        //}
+        qDebug()<<"Here";
+    }
     QString right;
-    if (answer_stud==real_ans){
+    if (answer_stud==right_answer){ // проверка условия
         right = '+';
     }
     else{
@@ -53,7 +90,7 @@ QString task1(QStringList params, int descriptor){
         return "Ответ верный";
     }
     else{
-        return "Ответ неверный";
+        return "Ответ неверный, правильный ответ: " + right_answer;
     }
 }
 QString task2(QStringList params, int descriptor){

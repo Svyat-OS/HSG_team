@@ -14,7 +14,7 @@ tasks::~tasks()
     delete ui;
 }
 
-void tasks::on_pushButton_6_clicked() // посмоттерть статистику
+void tasks::on_pushButton_6_clicked() // посмотреть статистику
 {
     // отправляем серверу запрос statistics и принимаем данные статистики по сокету
     QString query = "statistics";

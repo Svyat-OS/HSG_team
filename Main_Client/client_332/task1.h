@@ -5,7 +5,11 @@
 #include "ui_tasks.h"
 #include <QMessageBox>
 #include <QString>
+#include "random.h"
 #include "tasks.h"
+#include <QList>
+#include <QSet>
+#include <QDebug>
 
 namespace Ui {
 class task1;

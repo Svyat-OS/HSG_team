@@ -4,6 +4,8 @@
 #include <QStringList>
 #include <QDebug>
 #include <QTcpSocket>
+#include <QList>
+#include <QMap>
 
 QString parsing(QString str, int descriptor);
 QString task1(QStringList params,int descriptor);
