@@ -13,7 +13,7 @@ public:
 
 private slots:
     void test_case1();
-
+    void test_case2();
 };
 
 task_test::task_test()
@@ -39,6 +39,10 @@ void task_test::test_case1()
     params1.push_back("9");
     params1.push_back("8");
     QCOMPARE(task1(params1, 0),"Ответ верный");
+
+}
+
+void task_test::test_case2(){
     QStringList params2;
     params2.push_back("2999214");
     params2.push_back("2");
