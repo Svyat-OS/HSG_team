@@ -1,0 +1,508 @@
+*
+{
+  margin: 0;
+  padding: 0;
+}
+
+a
+{
+  text-decoration: none;
+}
+
+li
+{
+  text-decoration: none;
+  list-style: none;
+}
+
+body 
+{
+  font-size: 14px;
+  line-height: 22px;
+  width: 100%;
+  font-family: 'Noto Serif', serif;;
+  color: #ffffff;
+  background: #000000;
+  display: table;
+  min-height: 150vh;
+}
+
+main
+{
+  display: table-row;
+  height: 100%;
+}
+
+aside
+{
+  color: #fa560a;
+  position: absolute;
+  top: 800px;
+  left: 750px;
+  right: 5px;
+  width: auto;
+  min-width: auto;
+  text-align: left;
+  height: auto;
+  font-size: 30px;
+  line-height: 40px;
+  border-bottom: 3px solid #fa560a;
+  border-top: 3px solid #fa560a;
+}
+
+aside1
+{
+  color: #fa560a;
+  position: absolute;
+  top: 350px;
+  left: 50px;
+  right: 850px;
+  width: auto;
+  min-width: auto;
+  text-align: left;
+  height: auto;
+  font-size: 30px;
+  line-height: 60px;
+  border-bottom: 3px solid #fa560a;
+  border-top: 3px solid #fa560a;
+}
+
+aside p
+{
+  text-align: center;
+}
+
+aside1 p
+{
+  text-align: center;
+}
+  
+nav 
+{
+  color: #fa560a;
+  font-size: 20px;
+  line-height: 20px;
+  position: absolute;
+  top: 90px;
+  left: 5px;
+}
+
+nav1 
+{
+  color: #fa560a;;
+  font-size: 20px;
+  line-height: 20px;
+  position: absolute;
+  top: 90px;
+  left: 1150px;
+}
+
+header
+{
+  max-width: 100%;
+  font-size: 20px;
+  text-align: center;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background-color: #000000;
+  background-image: url(Images\logo2.jpg);
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  border-bottom: 3px solid #fa560a;
+}
+
+nav ul
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+}
+
+nav ul li a
+{
+  padding: 0 40px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Ubuntu', serif;
+  font-style: italic;
+  font-size: 30px;
+}
+
+nav1 ul
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+}
+
+nav1 ul li a
+{
+  padding: 0 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Ubuntu', serif;
+  font-style: italic;
+  font-size: 30px;
+}
+
+a
+{
+color: #ff4304;
+background: linear-gradient(45deg, #fa560a 33%, #9b3506 66%, #cc4a0d);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.topnav a:hover
+{
+  border-bottom: 3px solid #fa560a;
+  border-top: 3px solid #fa560a;
+}
+
+.topnav1 a:hover
+{
+  border-bottom: 3px solid #fa560a;
+  border-top: 3px solid #fa560a;
+}
+
+#video
+{
+  text-align: right;
+  background-color: #000000;
+  position: absolute;
+  top: 250px;
+  right: 70px;
+  background-image: url(Images\gen6.2.jpg);
+}
+
+#video video
+{
+  border-radius: 20%;
+}
+
+#image1
+{
+  padding-top: 50px;
+  position: absolute;
+  background-color: #000000;
+  top: 750px;
+  left: 70px;
+  background-image: url(Images\gen6.2.jpg);
+}
+
+#image1 img
+{
+  border-radius: 10%;
+}
+
+#image2
+{
+  position: absolute;
+  background-color: #000000;
+  top: 1000px;
+  left: 70px;
+  border-radius: 50%;
+  background-image: url(Images\gen6.2.jpg);
+}
+
+footer
+{
+  background-color: #000000;
+  color: #fa560a;
+  width: 100%;
+  height: auto;
+  margin-top: auto;
+  text-align: center;
+  max-width: 100%;
+  position: relative;
+}
+
+.footer
+{
+  background-color: #000000;
+  color: #fa560a;
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  text-align: center;
+  max-width: 100%;
+  position: absolute;
+}
+
+.icons-1 
+{
+  padding: 0;
+  list-style: none;
+  color: #fa560a;
+  font-size: 20px;
+  line-height: 20px;
+}
+.icons-1 p 
+{
+  display: inline-block;
+  position: relative;
+  font-size: 24px;
+  color: #fa560a;
+  line-height: 20px;
+}
+.icons-1 i,
+.icons-1 img 
+{
+  color: #fff;
+  position: absolute;
+  top: 240px;
+  left: 40px;
+  text-align:center;
+  transition: all 0.3s ease-out;
+  border-radius: 10%;
+}
+
+.icons-1 a:before 
+{
+
+  content: "";
+  width: 80px;
+  height: 80px;
+  display: block;
+  transition: all 0.3s ease-out;
+}
+.icons-1 a:hover:before 
+{
+  transform: scale(0);
+  transition: all 0.3s ease-in;
+}
+.icons-1 a:hover i,
+.icons-1 a:hover img 
+{
+  transform: scale(0.5);
+  transition: all 0.3s ease-in;
+}
+
+.social-icons-1 
+{
+  padding: 0;
+  list-style: none;
+}
+.social-icons-1 p 
+{
+  display: inline-block;
+  position: relative;
+  font-size: 24px;
+}
+.social-icons-1 i,
+.social-icons-1 img 
+{
+  color: #fff;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 50px;
+  height: 50px;
+  text-align:center;
+  transition: all 0.3s ease-out;
+}
+
+.social-icons-1 a:before 
+{
+
+  content: "";
+  width: 80px;
+  height: 80px;
+  display: block;
+  transition: all 0.3s ease-out;
+}
+.social-icons-1 a:hover:before 
+{
+  transform: scale(0);
+  transition: all 0.3s ease-in;
+}
+.social-icons-1 a:hover i,
+.social-icons-1 a:hover img 
+{
+  transform: scale(1.8);
+  transition: all 0.3s ease-in;
+}
+
+table
+{
+  top: 40px;
+  position: relative;
+  color: #ffffff;
+  margin-left: auto;
+  margin-top: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  text-align: center;
+  line-height: 30px;
+  width: 1000px;
+  border-bottom: 3px solid #fa560a;
+  border-top: 3px solid #fa560a;
+
+}
+
+.icons-1 
+{
+  padding: 0;
+  list-style: none;
+  color: #fa560a;
+  font-size: 20px;
+  line-height: 20px;
+}
+.icons-1 p 
+{
+  display: inline-block;
+  position: relative;
+  font-size: 24px;
+  color: #fa560a;
+  line-height: 20px;
+}
+.icons-1 i,
+.icons-1 img 
+{
+  color: #fff;
+  position: absolute;
+  top: 90px;
+  left: 40px;
+  text-align:center;
+  transition: all 0.3s ease-out;
+  border-radius: 10%;
+}
+
+.icons-1 a:before 
+{
+
+  content: "";
+  width: 80px;
+  height: 80px;
+  display: block;
+  transition: all 0.3s ease-out;
+}
+.icons-1 a:hover:before 
+{
+  transform: scale(0);
+  transition: all 0.3s ease-in;
+}
+.icons-1 a:hover i,
+.icons-1 a:hover img 
+{
+  transform: scale(0.5);
+  transition: all 0.3s ease-in;
+}
+
+.icons-2 
+{
+  padding: 0;
+  list-style: none;
+  color: #fa560a;
+  font-size: 20px;
+  line-height: 20px;
+}
+.icons-2 p 
+{
+  display: inline-block;
+  position: relative;
+  font-size: 24px;
+  color: #fa560a;
+  line-height: 20px;
+}
+.icons-2 i,
+.icons-2 img 
+{
+  color: #fff;
+  position: absolute;
+  left: 1250px;
+  top: 0px;
+  border-radius: 10%;
+  text-align:center;
+  transition: all 0.3s ease-out;
+  border-radius: 10%;
+}
+
+.icons-2 a:before 
+{
+
+  content: "";
+  width: 80px;
+  height: 80px;
+  display: block;
+  transition: all 0.3s ease-out;
+}
+.icons-2 a:hover:before 
+{
+  transform: scale(0);
+  transition: all 0.3s ease-in;
+}
+.icons-2 a:hover i,
+.icons-2 a:hover img 
+{
+  transform: scale(0.5);
+  transition: all 0.3s ease-in;
+}
+
+.icons-3 
+{
+  padding: 0;
+  list-style: none;
+  color: #fa560a;
+  font-size: 20px;
+  line-height: 20px;
+}
+.icons-3 p 
+{
+  display: inline-block;
+  position: relative;
+  font-size: 24px;
+  color: #fa560a;
+  line-height: 20px;
+}
+.icons-3 i,
+.icons-3 img 
+{
+  color: #fff;
+  position: absolute;
+  left: 600px;
+  top: -50px;
+  border-radius: 10%;
+  text-align:center;
+  transition: all 0.3s ease-out;
+  border-radius: 10%;
+}
+
+.icons-3 a:before 
+{
+
+  content: "";
+  width: 80px;
+  height: 80px;
+  display: block;
+  transition: all 0.3s ease-out;
+}
+.icons-3 a:hover:before 
+{
+  transform: scale(0);
+  transition: all 0.3s ease-in;
+}
+.icons-3 a:hover i,
+.icons-3 a:hover img 
+{
+  transform: scale(0.5);
+  transition: all 0.3s ease-in;
+}
+
+.name h1
+{
+  top: 10px;
+  width: 100%;
+  position: relative;
+  color: #000000;
+  background-color: #fa560a;
+  text-align: center;
+  height: 40px;
+}
